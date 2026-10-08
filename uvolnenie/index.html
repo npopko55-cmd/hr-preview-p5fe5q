@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Опрос увольняющегося работника</title>
+<link rel="stylesheet" href="../style.css?v=9">
+<header class="top"><div class="wrap">
+  <h1>Опрос увольняющегося работника</h1>
+  <p>Группа «ВИС»</p>
+</div></header>
+<div class="wrap">
+
+
+
+<form method="post" id="f" novalidate>
+<input type="hidden" name="csrf" value="f4bc47ffb4acbdd431b7277176f9001a">
+
+<div class="card">
+  <p class="hint">Спасибо, что работали с нами. Ваши ответы помогут сделать работу в компании лучше. Ответы не влияют на расчёт и документы и в отчётах приводятся обобщённо, без фамилий. Займёт около 5 минут.</p>
+  <label class="f" for="u-dep">Подразделение</label>
+  <input type="text" id="u-dep" name="department" value=""
+         placeholder="Например: Бухгалтерия" autocomplete="off">
+  <label class="f" for="u-pos">Должность</label>
+  <input type="text" id="u-pos" name="position" value="" autocomplete="off">
+  <label class="f" for="u-fio">Ф. И. О. — по желанию</label>
+  <input type="text" id="u-fio" name="fio" value="" autocomplete="off">
+  <label class="f">Стаж работы в Группе «ВИС»</label>
+  <div class="opts" role="radiogroup" aria-label="Стаж работы в Группе «ВИС»">
+          <label><input type="radio" name="tenure" value="до 3 месяцев"><span>до 3 месяцев</span></label>
+          <label><input type="radio" name="tenure" value="3–12 месяцев"><span>3–12 месяцев</span></label>
+          <label><input type="radio" name="tenure" value="1–3 года"><span>1–3 года</span></label>
+          <label><input type="radio" name="tenure" value="более 3 лет"><span>более 3 лет</span></label>
+      </div>
+</div>
+
+<div class="card">
+  <div class="q">
+    <p>Основные причины ухода — отметьте не более трёх</p>
+          <div class="chk lim" data-max="3" data-msg="Можно отметить не более трёх причин" data-more="q1" data-more-option="Другое"           role="group" aria-label="Основные причины ухода — отметьте не более трёх">
+                  <label><input type="checkbox" name="a[q1][]" value="Уровень заработной платы"><span>Уровень заработной платы</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Нет перспектив роста"><span>Нет перспектив роста</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Содержание работы, задачи"><span>Содержание работы, задачи</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Отношения с руководителем"><span>Отношения с руководителем</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Отношения в коллективе"><span>Отношения в коллективе</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Условия труда, рабочее место"><span>Условия труда, рабочее место</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Нагрузка, режим работы"><span>Нагрузка, режим работы</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Организация процессов, согласования"><span>Организация процессов, согласования</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Удалённость от дома, переезд"><span>Удалённость от дома, переезд</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Семейные или личные обстоятельства"><span>Семейные или личные обстоятельства</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Состояние здоровья"><span>Состояние здоровья</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Предложение другой компании"><span>Предложение другой компании</span></label>
+                  <label><input type="checkbox" name="a[q1][]" value="Другое"><span>Другое</span></label>
+              </div>
+            <input type="text" name="a[q1_t]" class="other" placeholder="Укажите, что именно" aria-label="Другая причина" hidden value="" autocomplete="off">
+          </div>
+  <div class="q">
+    <p>Что могло бы повлиять на ваше решение остаться?</p>
+          <textarea name="a[q2]" aria-label="Что могло бы повлиять на ваше решение остаться?"></textarea>
+      </div>
+</div>
+<div class="card">
+  <h2>Оцените по шкале от 1 до 5</h2>
+  <p class="hint" style="margin-bottom:4px">1 — очень плохо, 5 — отлично</p>
+    <div class="q">
+    <p>Содержание работы</p>
+    <div class="scale" role="radiogroup" aria-label="Содержание работы">
+              <label><input type="radio" name="a[q3_1]" value="1"><span>1</span></label>
+              <label><input type="radio" name="a[q3_1]" value="2"><span>2</span></label>
+              <label><input type="radio" name="a[q3_1]" value="3"><span>3</span></label>
+              <label><input type="radio" name="a[q3_1]" value="4"><span>4</span></label>
+              <label><input type="radio" name="a[q3_1]" value="5"><span>5</span></label>
+          </div>
+  </div>
+    <div class="q">
+    <p>Заработная плата и социальный пакет</p>
+    <div class="scale" role="radiogroup" aria-label="Заработная плата и социальный пакет">
+              <label><input type="radio" name="a[q3_2]" value="1"><span>1</span></label>
+              <label><input type="radio" name="a[q3_2]" value="2"><span>2</span></label>
+              <label><input type="radio" name="a[q3_2]" value="3"><span>3</span></label>
+              <label><input type="radio" name="a[q3_2]" value="4"><span>4</span></label>
+              <label><input type="radio" name="a[q3_2]" value="5"><span>5</span></label>
+          </div>
+  </div>
+    <div class="q">
+    <p>Руководитель</p>
+    <div class="scale" role="radiogroup" aria-label="Руководитель">
+              <label><input type="radio" name="a[q3_3]" value="1"><span>1</span></label>
+              <label><input type="radio" name="a[q3_3]" value="2"><span>2</span></label>
+              <label><input type="radio" name="a[q3_3]" value="3"><span>3</span></label>
+              <label><input type="radio" name="a[q3_3]" value="4"><span>4</span></label>
+              <label><input type="radio" name="a[q3_3]" value="5"><span>5</span></label>
+          </div>
+  </div>
+    <div class="q">
+    <p>Коллектив</p>
+    <div class="scale" role="radiogroup" aria-label="Коллектив">
+              <label><input type="radio" name="a[q3_4]" value="1"><span>1</span></label>
+              <label><input type="radio" name="a[q3_4]" value="2"><span>2</span></label>
+              <label><input type="radio" name="a[q3_4]" value="3"><span>3</span></label>
+              <label><input type="radio" name="a[q3_4]" value="4"><span>4</span></label>
+              <label><input type="radio" name="a[q3_4]" value="5"><span>5</span></label>
+          </div>
+  </div>
+    <div class="q">
+    <p>Условия труда и рабочее место</p>
+    <div class="scale" role="radiogroup" aria-label="Условия труда и рабочее место">
+              <label><input type="radio" name="a[q3_5]" value="1"><span>1</span></label>
+              <label><input type="radio" name="a[q3_5]" value="2"><span>2</span></label>
+              <label><input type="radio" name="a[q3_5]" value="3"><span>3</span></label>
+              <label><input type="radio" name="a[q3_5]" value="4"><span>4</span></label>
+              <label><input type="radio" name="a[q3_5]" value="5"><span>5</span></label>
+          </div>
+  </div>
+    <div class="q">
+    <p>Возможности обучения и развития</p>
+    <div class="scale" role="radiogroup" aria-label="Возможности обучения и развития">
+              <label><input type="radio" name="a[q3_6]" value="1"><span>1</span></label>
+              <label><input type="radio" name="a[q3_6]" value="2"><span>2</span></label>
+              <label><input type="radio" name="a[q3_6]" value="3"><span>3</span></label>
+              <label><input type="radio" name="a[q3_6]" value="4"><span>4</span></label>
+              <label><input type="radio" name="a[q3_6]" value="5"><span>5</span></label>
+          </div>
+  </div>
+    <div class="q">
+    <p>Организация процессов</p>
+    <div class="scale" role="radiogroup" aria-label="Организация процессов">
+              <label><input type="radio" name="a[q3_7]" value="1"><span>1</span></label>
+              <label><input type="radio" name="a[q3_7]" value="2"><span>2</span></label>
+              <label><input type="radio" name="a[q3_7]" value="3"><span>3</span></label>
+              <label><input type="radio" name="a[q3_7]" value="4"><span>4</span></label>
+              <label><input type="radio" name="a[q3_7]" value="5"><span>5</span></label>
+          </div>
+  </div>
+    <div class="q">
+    <p>Информированность о делах компании</p>
+    <div class="scale" role="radiogroup" aria-label="Информированность о делах компании">
+              <label><input type="radio" name="a[q3_8]" value="1"><span>1</span></label>
+              <label><input type="radio" name="a[q3_8]" value="2"><span>2</span></label>
+              <label><input type="radio" name="a[q3_8]" value="3"><span>3</span></label>
+              <label><input type="radio" name="a[q3_8]" value="4"><span>4</span></label>
+              <label><input type="radio" name="a[q3_8]" value="5"><span>5</span></label>
+          </div>
+  </div>
+  </div>
+<div class="card">
+  <div class="q">
+    <p>Насколько вероятно, что вы порекомендуете Группу «ВИС» как работодателя знакомым?</p>
+          <div class="nps" role="radiogroup" aria-label="Насколько вероятно, что вы порекомендуете Группу «ВИС» как работодателя знакомым?">
+                  <label><input type="radio" name="a[q4]" value="0"><span>0</span></label>
+                  <label><input type="radio" name="a[q4]" value="1"><span>1</span></label>
+                  <label><input type="radio" name="a[q4]" value="2"><span>2</span></label>
+                  <label><input type="radio" name="a[q4]" value="3"><span>3</span></label>
+                  <label><input type="radio" name="a[q4]" value="4"><span>4</span></label>
+                  <label><input type="radio" name="a[q4]" value="5"><span>5</span></label>
+                  <label><input type="radio" name="a[q4]" value="6"><span>6</span></label>
+                  <label><input type="radio" name="a[q4]" value="7"><span>7</span></label>
+                  <label><input type="radio" name="a[q4]" value="8"><span>8</span></label>
+                  <label><input type="radio" name="a[q4]" value="9"><span>9</span></label>
+                  <label><input type="radio" name="a[q4]" value="10"><span>10</span></label>
+              </div>
+      <div class="ends"><span>0 — точно нет</span><span>10 — точно да</span></div>
+      </div>
+  <div class="q">
+    <p>Рассмотрели бы вы возможность вернуться в компанию?</p>
+          <div class="opts" role="radiogroup" aria-label="Рассмотрели бы вы возможность вернуться в компанию?">
+                  <label><input type="radio" name="a[q5]" value="Да"><span>Да</span></label>
+                  <label><input type="radio" name="a[q5]" value="Возможно"><span>Возможно</span></label>
+                  <label><input type="radio" name="a[q5]" value="Нет"><span>Нет</span></label>
+              </div>
+            </div>
+  <div class="q">
+    <p>Как прошла процедура увольнения: передача дел, обходной лист?</p>
+          <div class="opts" role="radiogroup" aria-label="Как прошла процедура увольнения: передача дел, обходной лист?" data-more="q6" data-more-option="Были сложности">
+                  <label><input type="radio" name="a[q6]" value="Всё понятно и удобно"><span>Всё понятно и удобно</span></label>
+                  <label><input type="radio" name="a[q6]" value="Были сложности"><span>Были сложности</span></label>
+              </div>
+            <textarea name="a[q6_t]" class="other" placeholder="Расскажите, что было сложно" aria-label="Какие были сложности" hidden></textarea>
+          </div>
+  <div class="q">
+    <p>Ваши предложения компании</p>
+          <textarea name="a[q7]" aria-label="Ваши предложения компании"></textarea>
+      </div>
+</div>
+
+<p class="hint uvol-note">Отвечать на все вопросы не обязательно. При отправке сохраняются технические данные устройства — только чтобы отсеять повторные заполнения.</p>
+<div class="nav">
+  <button type="submit" class="done" id="send">Отправить ответы</button>
+</div>
+</form>
+</div>
+
+<script>
+(function(){
+  var f = document.getElementById('f'), b = document.getElementById('send');
+  if (!f || !b) return;
+
+  function toast(msg, el){
+    if (el) el.scrollIntoView({behavior:'smooth', block:'center'});
+    var t = document.getElementById('warn');
+    if (!t) { t = document.createElement('div'); t.id = 'warn'; t.className = 'toast'; document.body.appendChild(t); }
+    t.textContent = msg; t.classList.add('on');
+    clearTimeout(window.__wt);
+    window.__wt = setTimeout(function(){ t.classList.remove('on'); }, 2400);
+  }
+
+  // поле пояснения видно, пока выбран его вариант («Другое», «Были сложности»);
+  // при достижении предела остальные варианты бледнеют
+  function sync(){
+    [].forEach.call(f.querySelectorAll('[data-more]'), function(g){
+      var box = f.querySelector('[name="a[' + g.dataset.more + '_t]"]');
+      if (!box) return;
+      box.hidden = ![].some.call(g.querySelectorAll('input:checked'),
+        function(i){ return i.value === g.dataset.moreOption; });
+    });
+    [].forEach.call(f.querySelectorAll('.lim'), function(g){
+      g.classList.toggle('full', g.querySelectorAll('input:checked').length >= +g.dataset.max);
+    });
+  }
+
+  f.addEventListener('change', function(e){
+    var g = e.target.closest ? e.target.closest('.lim') : null;
+    if (g && e.target.checked && g.querySelectorAll('input:checked').length > +g.dataset.max) {
+      e.target.checked = false;
+      toast(g.dataset.msg || ('Можно отметить не более ' + g.dataset.max), g);
+    }
+    sync();
+  });
+
+  f.addEventListener('submit', function(e){
+    var over = [].filter.call(f.querySelectorAll('.lim'), function(g){
+      return g.querySelectorAll('input:checked').length > +g.dataset.max;
+    })[0];
+    if (over) { e.preventDefault(); toast(over.dataset.msg || ('Можно отметить не более ' + over.dataset.max), over); return; }
+    // защита от двойного нажатия «Отправить»
+    b.disabled = true;
+  });
+  // при возврате кнопкой «Назад» кнопка снова активна
+  window.addEventListener('pageshow', function(){ b.disabled = false; sync(); });
+  sync();
+})();
+</script>
+<script>document.querySelectorAll("form").forEach(function(f){f.addEventListener("submit",function(e){e.preventDefault();e.stopImmediatePropagation();var c=document.createElement("div");c.className="card";c.innerHTML="<h2>Спасибо!</h2><p>Это демо-версия для согласования вопросов — ответы здесь не сохраняются.</p>";f.replaceWith(c);window.scrollTo(0,0);},true);});</script>

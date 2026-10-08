@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Адаптация новичков</title>
+<link rel="stylesheet" href="../style.css?v=8">
+<header class="top"><div class="wrap">
+  <h1>Адаптация новичков</h1>
+  <p>Опрос для новых сотрудников · Группа «ВИС»</p>
+</div></header>
+<div class="wrap">
+
+  <div class="card">
+    <h2>Выберите этап</h2>
+    <p class="hint">Опрос для новых сотрудников. Займёт 3–5&nbsp;минут.</p>
+    <div class="stages">
+              <a class="btn" href="nedelya.html">Первая неделя</a>
+              <a class="btn" href="mesyac.html">Первый месяц</a>
+              <a class="btn" href="itog.html">Завершение испытательного срока</a>
+          </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  // защита от двойного нажатия «Отправить»; при возврате кнопкой «Назад» кнопка снова активна
+  var f = document.getElementById('f'), b = document.getElementById('send');
+  if (!f || !b) return;
+  f.addEventListener('submit', function(){ b.disabled = true; });
+  window.addEventListener('pageshow', function(){ b.disabled = false; });
+})();
+</script>
