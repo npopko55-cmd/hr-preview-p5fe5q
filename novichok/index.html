@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta name="robots" content="noindex, nofollow">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
@@ -397,6 +396,61 @@ main:focus{outline:none}
   .js .page{display:block!important;animation:none!important;page-break-after:always}
   .hero::before{background:rgba(15,31,92,.9)}
 }
+
+/* ---- структура компаний */
+.orgx-lead{color:var(--on-dark-2);max-width:68ch;margin-bottom:18px}
+.orgx-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.orgx-search{position:relative;max-width:560px;margin-bottom:18px}
+.orgx-search input{width:100%;min-height:48px;padding:12px 16px;font:400 16px var(--body);color:var(--text);background:var(--paper);border:2px solid transparent;border-radius:2px}
+.orgx-search input:focus{outline:none;border-color:var(--accent)}
+.orgx-results{position:absolute;z-index:20;left:0;right:0;top:100%;margin:4px 0 0;padding:6px;list-style:none;max-height:360px;overflow:auto;background:var(--paper);border-radius:2px;box-shadow:0 12px 32px rgba(0,0,0,.35)}
+.orgx-hit{display:block;width:100%;text-align:left;padding:9px 10px;border:0;background:none;color:var(--text);cursor:pointer;border-radius:2px;font:inherit}
+.orgx-hit:hover,.orgx-hit:focus-visible{background:var(--mist);outline:none}
+.orgx-hit-name{display:block;font-weight:600;font-size:15px;line-height:1.3}
+.orgx-hit-path{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.orgx-empty{padding:10px;color:var(--muted);font-size:15px}
+.orgx-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.orgx-tab{min-height:40px;padding:8px 14px;font:500 15px/1.1 var(--head);letter-spacing:.04em;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.35);border-radius:2px;cursor:pointer}
+.orgx-tab:hover{border-color:#fff}
+.orgx-tab[aria-selected="true"]{background:var(--accent);color:var(--navy-900);border-color:var(--accent)}
+.orgx-select{display:none;width:100%;min-height:48px;margin-bottom:16px;padding:10px 12px;font:500 16px var(--body);border-radius:2px;border:0}
+.orgx-card{padding:clamp(16px,2.4vw,26px)}
+.orgx-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:14px;padding-bottom:14px;margin-bottom:10px;border-bottom:1px solid var(--rule-light)}
+.orgx-title{margin:0;font:600 clamp(18px,2vw,22px)/1.25 var(--head);color:var(--ink)}
+.orgx-count{margin:4px 0 0;font-size:14px;color:var(--muted)}
+.orgx-actions{display:flex;flex-wrap:wrap;gap:8px}
+.btn-small{min-height:40px;padding:8px 14px;font-size:14px;background:var(--mist);color:var(--ink)}
+.btn-small:hover{background:var(--rule-light)}
+.btn-dark{background:var(--navy-700);color:#fff}
+.btn-dark:hover{background:var(--navy-900)}
+.orgx-list{list-style:none;margin:0;padding:0}
+.orgx-list .orgx-list{margin-left:15px;padding-left:16px;border-left:1px solid var(--rule-light)}
+.orgx-row{display:flex;align-items:flex-start;gap:8px;padding:6px 6px;border-radius:2px;transition:background-color .3s}
+.orgx-row.is-hit{background:#fff3d6}
+.orgx-toggle{flex:none;width:26px;height:26px;margin-top:-1px;border:1px solid var(--rule-light);border-radius:2px;background:var(--paper);color:var(--ink);cursor:pointer;position:relative}
+.orgx-toggle::before{content:"";position:absolute;left:8px;top:7px;width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
+.orgx-toggle[aria-expanded="true"]::before{transform:rotate(45deg);left:8px;top:5px}
+.orgx-toggle[aria-expanded="false"] ~ * {}
+.orgx-item > .orgx-row > .orgx-toggle[aria-expanded="false"]{background:var(--mist)}
+.orgx-item:has(> .orgx-row > .orgx-toggle[aria-expanded="false"]) > .orgx-list{display:none}
+.orgx-dot{flex:none;width:26px;height:26px;position:relative}
+.orgx-dot::before{content:"";position:absolute;left:10px;top:10px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.orgx-name{font-size:15.5px;line-height:1.4;color:var(--text);padding-top:2px}
+.orgx-name.is-head{font-weight:700;color:var(--ink)}
+.orgx-badge{flex:none;margin-top:3px;padding:1px 7px;font-size:12px;line-height:18px;color:var(--muted);background:var(--mist);border-radius:9px}
+.orgx-dialog{width:min(96vw,1400px);max-width:none;height:min(92vh,1000px);max-height:none;padding:0;border:0;border-radius:3px;background:var(--paper);color:var(--text)}
+.orgx-dialog::backdrop{background:rgba(5,12,40,.78)}
+.orgx-dlg-bar{position:sticky;top:0;display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--navy-800);color:#fff}
+.orgx-dlg-title{flex:1;margin:0;font:500 16px/1.3 var(--head);letter-spacing:.03em}
+.orgx-dlg-bar button,.orgx-dlg-open{min-width:40px;min-height:40px;padding:6px 12px;font:600 16px var(--body);color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);border-radius:2px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.orgx-dlg-body{height:calc(100% - 60px);overflow:auto;-webkit-overflow-scrolling:touch}
+.orgx-dlg-body img{width:100%;max-width:none}
+@media (max-width:720px){
+  .orgx-tabs{display:none}
+  .orgx-select{display:block}
+  .orgx-list .orgx-list{margin-left:10px;padding-left:10px}
+  .orgx-dlg-open{display:none}
+}
 </style>
 </head>
 <body>
@@ -548,7 +602,39 @@ main:focus{outline:none}
       <div class="node node-ops"><h4>Компании-операторы по&nbsp;эксплуатации объектов</h4></div>
       <div class="node node-social"><h4>Дивизион социальной инфраструктуры</h4><p>Объекты образования, культуры и&nbsp;здравоохранения</p></div>
     </div>
-    <div class="ph"><span class="ph-tag">В подготовке</span><p>Компании холдинга и&nbsp;подразделения&nbsp;— схема</p></div>
+  </section>
+
+  <section class="block orgx" id="orgx" aria-labelledby="t-orgx">
+    <h3 class="block-title" id="t-orgx">Структура компаний Группы «ВИС»</h3>
+    <p class="orgx-lead">Выберите компанию, чтобы посмотреть, из&nbsp;каких подразделений она состоит и&nbsp;кто кому подчиняется. Поиск работает по&nbsp;всем компаниям сразу.</p>
+    <div class="orgx-search">
+      <label for="orgxQ" class="orgx-sr">Поиск подразделения или должности</label>
+      <input id="orgxQ" type="search" placeholder="Найти подразделение или должность" autocomplete="off">
+      <ul class="orgx-results" hidden></ul>
+    </div>
+    <div class="orgx-tabs" role="tablist" aria-label="Компании Группы"></div>
+    <label class="orgx-sr" for="orgxSel">Компания</label>
+    <select class="orgx-select" id="orgxSel"></select>
+    <div class="card orgx-card">
+      <div class="orgx-head">
+        <div><h4 class="orgx-title"></h4><p class="orgx-count"></p></div>
+        <div class="orgx-actions">
+          <button type="button" class="btn btn-small orgx-expand">Развернуть всё</button>
+          <button type="button" class="btn btn-small btn-dark orgx-scheme">Утверждённая схема</button>
+        </div>
+      </div>
+      <div class="orgx-tree"></div>
+    </div>
+    <dialog class="orgx-dialog" id="orgxDialog" aria-labelledby="orgxDlgT">
+      <div class="orgx-dlg-bar">
+        <p class="orgx-dlg-title" id="orgxDlgT"></p>
+        <button type="button" class="orgx-zout" aria-label="Уменьшить">−</button>
+        <button type="button" class="orgx-zin" aria-label="Увеличить">+</button>
+        <a class="orgx-dlg-open" target="_blank" rel="noopener">Открыть отдельно</a>
+        <button type="button" class="orgx-close" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="orgx-dlg-body"><img alt=""></div>
+    </dialog>
   </section>
 
   <footer class="page-foot">
@@ -867,9 +953,9 @@ main:focus{outline:none}
   <section class="surveys" aria-labelledby="t-surveys">
     <h3 id="t-surveys">Опросы адаптации</h3>
     <div class="survey-btns">
-      <a class="btn btn-primary" href="../adaptacia/nedelya.html">Опрос первой недели</a>
-      <a class="btn btn-primary" href="../adaptacia/mesyac.html">Опрос первого месяца</a>
-      <a class="btn btn-primary" href="../adaptacia/itog.html">Итоговый опрос</a>
+      <a class="btn btn-primary" href="../adaptacia/?etap=nedelya">Опрос первой недели</a>
+      <a class="btn btn-primary" href="../adaptacia/?etap=mesyac">Опрос первого месяца</a>
+      <a class="btn btn-primary" href="../adaptacia/?etap=itog">Итоговый опрос</a>
     </div>
     <p class="note">Ответы не&nbsp;влияют на&nbsp;оценку испытательного срока.</p>
   </section>
@@ -1269,5 +1355,7 @@ main:focus{outline:none}
   update(false);
 })();
 </script>
+<script src="org/org-data.js"></script>
+<script src="org/org.js"></script>
 </body>
 </html>
