@@ -152,22 +152,6 @@ main:focus{outline:none}
 .mission h3{font-size:18px;letter-spacing:.14em;color:var(--accent)}
 .mission p{display:flex;gap:16px;font:600 clamp(21px,2.3vw,28px)/1.22 var(--head);text-transform:uppercase;letter-spacing:.02em}
 .mission p::before{content:"";flex:none;margin-top:.15em;border-left:22px solid var(--accent);border-top:14px solid transparent;border-bottom:14px solid transparent;height:0}
-.org{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;gap:46px 30px}
-.org-lines{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-.org-lines line{stroke:rgba(255,255,255,.55);stroke-width:1.5;vector-effect:non-scaling-stroke}
-.node{position:relative;z-index:1;background:var(--paper);color:var(--text);border-radius:2px;padding:16px 18px 18px;border-top:8px solid var(--c,var(--d-build))}
-.node h4{font-size:19px;color:var(--ink);margin-bottom:8px}
-.node p{font-size:15.5px;line-height:1.45}
-.node-root{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--navy-800);color:#fff;border:2px solid var(--accent)}
-.node-root img{width:84px;margin-bottom:10px}
-.node-root h4{color:#fff;font-size:21px}
-.node-root p{color:var(--on-dark-2)}
-.node-build{--c:var(--d-build);grid-column:1;grid-row:1}
-.node-invest{--c:var(--d-invest);grid-column:3;grid-row:1}
-.node-transport{--c:var(--d-transport);grid-column:1;grid-row:2}
-.node-ops{grid-column:2;grid-row:2;display:flex;align-items:center;justify-content:center;text-align:center;background:var(--navy-900);border:2px solid var(--d-social)}
-.node-ops h4{color:#fff;margin:0}
-.node-social{--c:var(--d-social);grid-column:3;grid-row:2}
 
 /* ---------- 3. проекты ---------- */
 .proj-grid{list-style:none;margin:0;padding:0;display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
@@ -334,10 +318,6 @@ main:focus{outline:none}
 @media (max-width:900px){
   .about,.work{grid-template-columns:1fr}
   .work-photo{min-height:0;max-height:300px}
-  .org{grid-template-columns:1fr;grid-auto-rows:auto;gap:12px}
-  .org-lines{display:none}
-  .node{grid-column:auto!important;grid-row:auto!important}
-  .node-ops{padding:18px}
 }
 @media (max-width:760px){
   .princ-row{grid-template-columns:1fr}
@@ -424,30 +404,31 @@ main:focus{outline:none}
 .orgx-tab:active{transform:scale(.97)}
 .orgx-tab[aria-selected="true"]{background:var(--accent);color:var(--navy-900);border-color:var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 8px 20px -10px rgba(252,176,52,.8)}
 .orgx-select{display:none;width:100%;min-height:52px;margin-bottom:16px;padding:10px 44px 10px 16px;font:500 17px var(--head);letter-spacing:.03em;color:var(--navy-900);background:var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%230f1f5c' stroke-width='2'%3E%3Cpath d='M2 5l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 16px center;border-radius:3px;border:0;-webkit-appearance:none;appearance:none}
-.orgx-card{padding:clamp(16px,2.4vw,28px)}
-.orgx-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 20px;padding-bottom:18px;margin-bottom:16px;border-bottom:1px solid var(--rule-light)}
-.orgx-eyebrow{display:flex;align-items:center;gap:10px;margin:0 0 9px;font:500 12px/1 var(--head);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-variant-numeric:tabular-nums}
-.orgx-eyebrow .tris{width:24px;height:7px}
-.orgx-title{margin:0;font:600 clamp(20px,2.3vw,27px)/1.18 var(--head);color:var(--ink);text-wrap:balance}
-.orgx-count{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 18px;margin:8px 0 0;font-size:14.5px;color:var(--muted);font-variant-numeric:tabular-nums}
-.orgx-count b{margin-right:5px;font:600 19px/1 var(--head);color:var(--ink)}
-.orgx-head > div:first-child{flex:1 1 380px;min-width:0}
-.orgx-actions{display:flex;flex-wrap:wrap;gap:8px}
-.btn-small{min-height:40px;padding:8px 14px;font-size:14px;background:var(--mist);color:var(--ink)}
-.btn-small:hover{background:var(--rule-light)}
-.btn-dark{background:var(--navy-700);color:#fff}
-.btn-dark:hover{background:var(--navy-900)}
-.orgx-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;margin-bottom:12px}
-.orgx-hint{flex:1 1 260px;margin:0;font-size:13.5px;line-height:1.4;color:var(--muted)}
+.orgx-intro{max-width:72ch;margin:0 0 10px;font-size:18px;line-height:1.5;color:#fff;text-wrap:pretty}
+.orgx-card{padding:clamp(16px,2.4vw,26px)}
+.orgx-head{display:flex;align-items:center;justify-content:space-between;gap:12px 20px;margin-bottom:14px}
+.orgx-head-t{flex:1 1 auto;min-width:0}
+.orgx-title{margin:0;font:600 clamp(20px,2.3vw,26px)/1.18 var(--head);color:var(--ink);text-wrap:balance}
+.orgx-count{margin:5px 0 0;font-size:14.5px;line-height:1.35;color:var(--muted);font-variant-numeric:tabular-nums}
+.orgx-count b{font-weight:600;color:var(--ink)}
+.orgx-expand{flex:none;min-height:40px;padding:8px 16px;font:500 14px/1 var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:#fff;border:1px solid var(--rule-light);border-radius:999px;cursor:pointer;transition:background-color .15s ease-out,border-color .15s ease-out,transform .12s ease-out}
+.orgx-expand:hover{background:var(--mist);border-color:#c9d1e4}
+.orgx-expand:active{transform:scale(.97)}
+.orgx-expand:focus-visible{outline:3px solid var(--navy-700);outline-offset:2px}
+.orgx-bar{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;min-height:36px;margin-bottom:8px}
+.orgx-hint{flex:1 1 auto;margin:0;font-size:13.5px;line-height:1.4;color:var(--muted)}
 .orgx-hint-m{display:none}
-.orgx-tools{display:flex;align-items:center;gap:8px;margin-left:auto}
-.orgx-seg{display:inline-flex;align-items:center;gap:2px;padding:3px;background:var(--mist);border-radius:6px}
-.orgx-tool{min-width:40px;height:40px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:4px;background:transparent;color:var(--ink);font:600 13.5px/1 var(--body);cursor:pointer;transition:background-color .15s ease-out,box-shadow .15s ease-out,transform .12s ease-out}
-.orgx-tool:hover{background:#fff;box-shadow:0 1px 2px rgba(15,31,92,.14)}
-.orgx-tool:active{transform:scale(.96)}
-.orgx-tool:disabled{opacity:.35;cursor:default;background:transparent;box-shadow:none;transform:none}
+.orgx-tools{flex:none;display:flex;align-items:center;gap:2px}
+.orgx-sep{width:1px;height:18px;margin:0 6px;background:var(--rule-light)}
+.orgx-tool{min-width:36px;height:36px;padding:0 8px;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;background:transparent;color:var(--ink);font:500 13.5px/1 var(--body);cursor:pointer;transition:background-color .15s ease-out,color .15s ease-out,transform .12s ease-out}
+.orgx-tool:hover{background:var(--mist)}
+.orgx-tool:active{transform:scale(.95)}
+.orgx-tool:focus-visible{outline:3px solid var(--navy-700);outline-offset:1px}
+.orgx-tool:disabled{color:#a9b2cb;cursor:default;background:transparent;transform:none}
 .orgx-tool svg{width:16px;height:16px;flex:none}
-.orgx-zval{min-width:46px;text-align:center;font:600 13px/1 var(--body);color:var(--muted);font-variant-numeric:tabular-nums}
+.orgx-tool-t{padding:0 12px;text-decoration:underline;text-decoration-color:rgba(17,46,110,.25);text-underline-offset:.25em}
+.orgx-tool-t:disabled{text-decoration:none}
+.orgx-zval{min-width:42px;text-align:center;font:500 13px/1 var(--body);color:var(--muted);font-variant-numeric:tabular-nums}
 .orgx-canvas{position:relative;border-radius:6px;background:#f5f7fc;box-shadow:inset 0 0 0 1px #e1e7f2}
 .orgx-canvas::before,.orgx-canvas::after{content:"";position:absolute;z-index:2;top:1px;bottom:1px;width:56px;pointer-events:none;opacity:0;transition:opacity .2s ease-out}
 .orgx-canvas::before{left:1px;border-radius:6px 0 0 6px;background:linear-gradient(90deg,#f5f7fc 15%,rgba(245,247,252,0))}
@@ -527,25 +508,20 @@ main:focus{outline:none}
 .oc-list .oc-list > .oc-item{padding-left:18px}
 .oc-list .oc-list > .oc-item::before{left:7px;width:11px}
 .oc-list .oc-list > .oc-item::after{left:7px}
-.orgx-dialog{width:min(96vw,1400px);max-width:none;height:min(92vh,1000px);max-height:none;padding:0;border:0;border-radius:3px;background:var(--paper);color:var(--text)}
-.orgx-dialog::backdrop{background:rgba(5,12,40,.78)}
-.orgx-dlg-bar{position:sticky;top:0;display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--navy-800);color:#fff}
-.orgx-dlg-title{flex:1;margin:0;font:500 16px/1.3 var(--head);letter-spacing:.03em}
-.orgx-dlg-bar button,.orgx-dlg-open{min-width:40px;min-height:40px;padding:6px 12px;font:600 16px var(--body);color:#fff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);border-radius:2px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
-.orgx-dlg-body{height:calc(100% - 60px);overflow:auto;-webkit-overflow-scrolling:touch}
-.orgx-dlg-body img{width:100%;max-width:none}
 @media (prefers-reduced-motion:reduce){
   .orgx *,.orgx *::before,.orgx *::after{transition-duration:0s!important;transition-delay:0s!important;animation:none!important}
 }
 @media (max-width:720px){
   .orgx-tabs{display:none}
   .orgx-select{display:block}
-  .orgx-dlg-open{display:none}
-  .orgx-actions{width:100%}
-  .orgx-actions .btn{flex:1 1 auto}
-  .orgx-bar{margin-bottom:10px}
+  .orgx-intro{font-size:17px}
+  .orgx-head{flex-wrap:wrap;align-items:flex-start;gap:10px;margin-bottom:10px}
+  .orgx-head-t{flex-basis:100%}
+  .orgx-expand{min-height:36px;padding:6px 14px;font-size:13px;letter-spacing:.06em}
+  .orgx-search input{padding-right:12px}
+  .orgx-bar{min-height:0;margin-bottom:10px}
   .orgx-tools,.orgx-hint-d{display:none}
-  .orgx-hint-m{display:block}
+  .orgx-hint-m{display:inline}
   .orgx-canvas::before,.orgx-canvas::after,.orgx-more{display:none!important}
   .orgx-view{overflow:visible;padding:16px 12px 18px;cursor:auto;-webkit-user-select:auto;user-select:auto;background-size:18px 18px}
   .orgx-stage{width:auto;zoom:1!important}
@@ -702,30 +678,15 @@ main:focus{outline:none}
     </section>
   </div>
 
-  <section class="block" aria-labelledby="t-org">
-    <h3 class="block-title" id="t-org">Корпоративная структура</h3>
-    <div class="org">
-      <svg class="org-lines" viewBox="0 0 600 200" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-        <line x1="300" y1="50" x2="100" y2="50"/><line x1="300" y1="50" x2="500" y2="50"/>
-        <line x1="300" y1="50" x2="100" y2="150"/><line x1="300" y1="50" x2="500" y2="150"/>
-        <line x1="100" y1="150" x2="500" y2="150"/>
-      </svg>
-      <div class="node node-root"><img src="assets/logo-white.png" width="206" height="149" alt=""><h4>Группа «ВИС» (АО)</h4><p>Управляющая и&nbsp;владеющая компания</p></div>
-      <div class="node node-build"><h4>Строительный дивизион</h4><p>Функции генподряда, проектирование, строительство</p></div>
-      <div class="node node-invest"><h4>Инвестиционный дивизион</h4><p>Структурирование проектов, организация финансирования</p></div>
-      <div class="node node-transport"><h4>Дивизион транспортной инфраструктуры</h4><p>Транспортная инфраструктура: мосты и&nbsp;автодороги</p></div>
-      <div class="node node-ops"><h4>Компании-операторы по&nbsp;эксплуатации объектов</h4></div>
-      <div class="node node-social"><h4>Дивизион социальной инфраструктуры</h4><p>Объекты образования, культуры и&nbsp;здравоохранения</p></div>
-    </div>
-  </section>
 
   <section class="block orgx" id="orgx" aria-labelledby="t-orgx">
-    <h3 class="block-title" id="t-orgx">Структура компаний Группы «ВИС»</h3>
+    <h3 class="block-title" id="t-orgx">Структура Группы «ВИС»</h3>
+    <p class="orgx-intro">Группа «ВИС» (АО)&nbsp;— управляющая и&nbsp;владеющая компания холдинга. В&nbsp;холдинг входят строительный и&nbsp;инвестиционный дивизионы, дивизионы транспортной и&nbsp;социальной инфраструктуры, а&nbsp;ещё компании-операторы, которые эксплуатируют объекты.</p>
     <p class="orgx-lead">Выберите компанию, чтобы посмотреть, из&nbsp;каких подразделений она состоит и&nbsp;кто кому подчиняется. Поиск работает по&nbsp;всем компаниям сразу.</p>
     <div class="orgx-search">
       <label for="orgxQ" class="orgx-sr">Поиск подразделения или должности</label>
       <svg class="orgx-search-ico" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.75"/><path d="M13 13l4.5 4.5"/></svg>
-      <input id="orgxQ" type="search" placeholder="Найти подразделение или должность" autocomplete="off" aria-controls="orgxRes" aria-expanded="false">
+      <input id="orgxQ" type="search" placeholder="Подразделение или должность" autocomplete="off" aria-controls="orgxRes" aria-expanded="false">
       <div class="orgx-results" id="orgxRes" hidden></div>
     </div>
     <div class="orgx-tabs" role="tablist" aria-label="Компании Группы"></div>
@@ -733,30 +694,22 @@ main:focus{outline:none}
     <select class="orgx-select" id="orgxSel"></select>
     <div class="card orgx-card">
       <div class="orgx-head">
-        <div>
-          <p class="orgx-eyebrow"><svg class="tris" aria-hidden="true" focusable="false"><use href="#i-tris"/></svg><span class="orgx-eyebrow-t"></span></p>
+        <div class="orgx-head-t">
           <h4 class="orgx-title"></h4>
           <p class="orgx-count"></p>
         </div>
-        <div class="orgx-actions">
-          <button type="button" class="btn btn-small orgx-expand">Развернуть всё</button>
-          <button type="button" class="btn btn-small btn-dark orgx-scheme">Утверждённая схема</button>
-        </div>
+        <button type="button" class="orgx-expand">Развернуть всё</button>
       </div>
       <div class="orgx-bar">
-        <p class="orgx-hint orgx-hint-d">Нажмите на&nbsp;карточку, чтобы раскрыть подразделение. Схему можно двигать мышью.</p>
-        <p class="orgx-hint orgx-hint-m">Нажмите на&nbsp;карточку, чтобы раскрыть подразделение.</p>
+        <p class="orgx-hint"><span class="orgx-hint-d">Нажмите на&nbsp;карточку, чтобы раскрыть подразделение. Схему можно двигать мышью.</span><span class="orgx-hint-m">Нажмите на&nbsp;карточку, чтобы раскрыть подразделение.</span></p>
         <div class="orgx-tools" role="group" aria-label="Просмотр схемы">
-          <div class="orgx-seg">
-            <button type="button" class="orgx-tool ox-left" aria-label="Листать схему влево"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5L5.5 8l4.5 4.5"/></svg></button>
-            <button type="button" class="orgx-tool ox-right" aria-label="Листать схему вправо"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5"/></svg></button>
-          </div>
-          <div class="orgx-seg">
-            <button type="button" class="orgx-tool ox-zout" aria-label="Уменьшить схему"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3.5 8h9"/></svg></button>
-            <span class="orgx-zval" aria-live="polite">100%</span>
-            <button type="button" class="orgx-tool ox-zin" aria-label="Увеличить схему"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3.5 8h9M8 3.5v9"/></svg></button>
-            <button type="button" class="orgx-tool ox-fit"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 4.5L2 8l3.5 3.5M10.5 4.5L14 8l-3.5 3.5"/></svg><span>По ширине</span></button>
-          </div>
+          <button type="button" class="orgx-tool ox-left" aria-label="Листать схему влево"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5L5.5 8l4.5 4.5"/></svg></button>
+          <button type="button" class="orgx-tool ox-right" aria-label="Листать схему вправо"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5"/></svg></button>
+          <span class="orgx-sep" aria-hidden="true"></span>
+          <button type="button" class="orgx-tool ox-zout" aria-label="Уменьшить схему"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3.5 8h9"/></svg></button>
+          <span class="orgx-zval" aria-live="polite">100%</span>
+          <button type="button" class="orgx-tool ox-zin" aria-label="Увеличить схему"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M3.5 8h9M8 3.5v9"/></svg></button>
+          <button type="button" class="orgx-tool orgx-tool-t ox-fit">По ширине</button>
         </div>
       </div>
       <div class="orgx-canvas">
@@ -767,16 +720,6 @@ main:focus{outline:none}
         <button type="button" class="orgx-more orgx-more-r" tabindex="-1" aria-hidden="true" hidden></button>
       </div>
     </div>
-    <dialog class="orgx-dialog" id="orgxDialog" aria-labelledby="orgxDlgT">
-      <div class="orgx-dlg-bar">
-        <p class="orgx-dlg-title" id="orgxDlgT"></p>
-        <button type="button" class="orgx-zout" aria-label="Уменьшить">−</button>
-        <button type="button" class="orgx-zin" aria-label="Увеличить">+</button>
-        <a class="orgx-dlg-open" target="_blank" rel="noopener">Открыть отдельно</a>
-        <button type="button" class="orgx-close" aria-label="Закрыть">✕</button>
-      </div>
-      <div class="orgx-dlg-body"><img alt=""></div>
-    </dialog>
   </section>
 
   <footer class="page-foot">
@@ -1497,7 +1440,7 @@ main:focus{outline:none}
   update(false);
 })();
 </script>
-<script src="org/org-data.js?v=20261110"></script>
-<script src="org/org.js?v=20261110"></script>
+<script src="org/org-data.js?v=20261110b"></script>
+<script src="org/org.js?v=20261110b"></script>
 </body>
 </html>

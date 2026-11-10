@@ -1,4 +1,4 @@
-/* Раздел «Структура компаний Группы «ВИС»»: оргсхема, выбор компании, поиск, утверждённая схема */
+/* Раздел «Структура Группы «ВИС»»: оргсхема, выбор компании, поиск */
 (function () {
   'use strict';
   var root = document.getElementById('orgx');
@@ -8,7 +8,6 @@
   function q(s) { return root.querySelector(s); }
   var tabs = q('.orgx-tabs');
   var select = q('.orgx-select');
-  var eyebrow = q('.orgx-eyebrow-t');
   var title = q('.orgx-title');
   var count = q('.orgx-count');
   var canvas = q('.orgx-canvas');
@@ -16,12 +15,10 @@
   var stage = q('.orgx-stage');
   var input = q('.orgx-search input');
   var results = q('.orgx-results');
-  var schemeBtn = q('.orgx-scheme');
   var expandBtn = q('.orgx-expand');
   var btnL = q('.ox-left'), btnR = q('.ox-right');
   var moreL = q('.orgx-more-l'), moreR = q('.orgx-more-r');
   var btnIn = q('.ox-zin'), btnOut = q('.ox-zout'), btnFit = q('.ox-fit'), zval = q('.orgx-zval');
-  var dialog = document.getElementById('orgxDialog');
 
   var mqMobile = window.matchMedia('(max-width:720px)');
   var mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -159,17 +156,13 @@
       b.tabIndex = k === i ? 0 : -1;
     });
     select.value = i;
-    eyebrow.textContent = 'Компания ' + (i + 1) + ' из ' + data.length;
     title.textContent = co.full;
     var total = size(co.tree) + 1, direct = (co.tree.c || []).length;
     count.innerHTML = '';
-    [[total, plural(total, 'подразделение и должность', 'подразделения и должности', 'подразделений и должностей')],
-     [direct, 'в прямом подчинении']].forEach(function (x) {
-      var sp = el('span');
-      sp.appendChild(el('b', null, String(x[0])));
-      sp.appendChild(document.createTextNode(x[1]));
-      count.appendChild(sp);
-    });
+    count.appendChild(el('b', null, String(total)));
+    count.appendChild(document.createTextNode(' ' + plural(total, 'подразделение и должность', 'подразделения и должности', 'подразделений и должностей') + ' · '));
+    count.appendChild(el('b', null, String(direct)));
+    count.appendChild(document.createTextNode(' в прямом подчинении'));
     stage.classList.add('no-anim');
     stage.innerHTML = '';
     var ul = el('ul', 'oc-tree');
@@ -493,27 +486,6 @@
   document.addEventListener('click', function (e) {
     if (!results.hidden && !q('.orgx-search').contains(e.target)) openResults(false);
   });
-
-  // ---- утверждённая схема
-  var img = dialog.querySelector('img');
-  var dzoom = 1;
-  function setDlgZoom(z) {
-    dzoom = Math.max(1, Math.min(4, z));
-    img.style.width = (dzoom * 100) + '%';
-  }
-  schemeBtn.addEventListener('click', function () {
-    var co = data[current];
-    img.src = co.img;
-    img.alt = 'Организационная структура ' + co.full;
-    dialog.querySelector('.orgx-dlg-title').textContent = co.full;
-    dialog.querySelector('.orgx-dlg-open').href = co.img;
-    setDlgZoom(1);
-    if (dialog.showModal) dialog.showModal(); else window.open(co.img, '_blank');
-  });
-  dialog.querySelector('.orgx-zin').addEventListener('click', function () { setDlgZoom(dzoom + 0.5); });
-  dialog.querySelector('.orgx-zout').addEventListener('click', function () { setDlgZoom(dzoom - 0.5); });
-  dialog.querySelector('.orgx-close').addEventListener('click', function () { dialog.close(); });
-  dialog.addEventListener('click', function (e) { if (e.target === dialog) dialog.close(); });
 
   show(0);
 })();
