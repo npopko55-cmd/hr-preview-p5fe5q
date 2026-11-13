@@ -14,7 +14,6 @@
   var lines = q('.orgx-map-lines');
   var coView = q('.orgx-co');
   var crumb = q('.orgx-crumb');
-  var legend = q('.orgx-legend');
   var title = q('.orgx-title');
   var count = q('.orgx-count');
   var canvas = q('.orgx-canvas');
@@ -167,10 +166,6 @@
       co.setAttribute('aria-hidden', 'true');
       card.appendChild(co);
     }
-    if (n.hq) {
-      li.classList.add('is-hq');
-      card.appendChild(el('span', 'oc-hq', 'Напрямую руководителю'));
-    }
     card.appendChild(name);
     if (kids.length && lvl > 0) {
       li.setAttribute('aria-expanded', 'false');
@@ -230,7 +225,6 @@
     var co = data[i];
     title.textContent = co.full;
     crumb.textContent = divisionOf(co.id);
-    legend.hidden = !(co.tree.c || []).some(function (c) { return c.hq; });
     var total = size(co.tree) + 1, direct = (co.tree.c || []).length;
     count.innerHTML = '';
     count.appendChild(el('b', null, String(total)));
