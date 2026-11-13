@@ -1,13 +1,20 @@
-/* Раздел «Структура Группы «ВИС»»: оргсхема, выбор компании, поиск */
+/* Раздел «Структура Группы «ВИС»»: паучок дивизионов, оргсхема компании, поиск.
+   Адрес вида компании: #orgx/<id> (роутер страницы берёт часть до «/»). */
 (function () {
   'use strict';
   var root = document.getElementById('orgx');
   var data = window.VIS_ORG;
-  if (!root || !data || !data.length) return;
+  var groups = window.VIS_DIVISIONS;
+  if (!root || !data || !data.length || !groups) return;
+  var byId = {};
+  data.forEach(function (co, i) { byId[co.id] = i; });
 
   function q(s) { return root.querySelector(s); }
-  var tabs = q('.orgx-tabs');
-  var select = q('.orgx-select');
+  var map = q('.orgx-map');
+  var lines = q('.orgx-map-lines');
+  var coView = q('.orgx-co');
+  var crumb = q('.orgx-crumb');
+  var legend = q('.orgx-legend');
   var title = q('.orgx-title');
   var count = q('.orgx-count');
   var canvas = q('.orgx-canvas');
@@ -23,7 +30,7 @@
   var mqMobile = window.matchMedia('(max-width:720px)');
   var mqReduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var GAP = 20, PAD = 28, COL_MIN = 216, COL_MAX = 320;
-  var current = 0, zoom = 1, uid = 0;
+  var current = -1, zoom = 1, uid = 0, pending = null;
 
   function el(tag, cls, text) {
     var e = document.createElement(tag);
@@ -51,29 +58,95 @@
   var CHEV = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5L6 7.5l3-3"/></svg>';
   var TRIS = '<svg class="tris" aria-hidden="true" focusable="false"><use href="#i-tris"/></svg>';
 
-  // ---- компании
-  data.forEach(function (co, i) {
-    var b = el('button', 'orgx-tab', co.name);
-    b.type = 'button';
-    b.setAttribute('role', 'tab');
-    b.addEventListener('click', function () { show(i); });
-    tabs.appendChild(b);
-    var o = el('option', null, co.name);
-    o.value = i;
-    select.appendChild(o);
-  });
-  select.addEventListener('change', function () { show(+select.value); });
-  tabs.addEventListener('keydown', function (e) {
-    var k = e.key, n = data.length, i = current;
-    if (k === 'ArrowRight') i = (current + 1) % n;
-    else if (k === 'ArrowLeft') i = (current - 1 + n) % n;
-    else if (k === 'Home') i = 0;
-    else if (k === 'End') i = n - 1;
-    else return;
-    e.preventDefault();
-    show(i);
-    tabs.children[i].focus();
-  });
+  // ---- паучок: Группа «ВИС» в центре, дивизионы с компаниями вокруг
+  function coHref(id) { return '#orgx/' + id; }
+  (function buildMap() {
+    var hub = el('a', 'orgx-hub');
+    hub.href = coHref(groups.center.id);
+    var logo = el('img');
+    logo.src = 'assets/logo-white.png';
+    logo.width = 206; logo.height = 149; logo.alt = '';
+    hub.appendChild(logo);
+    hub.appendChild(el('span', 'orgx-hub-name', groups.center.name));
+    hub.appendChild(el('span', 'orgx-hub-sub', 'Управляющая компания'));
+    hub.appendChild(el('span', 'orgx-hub-go', 'Открыть структуру'));
+    map.appendChild(hub);
+    groups.divisions.forEach(function (d) {
+      var box = el('section', 'orgx-div');
+      box.dataset.d = d.id;
+      var h = el('h4', null, d.name);
+      h.id = 'orgx-d-' + d.id;
+      box.setAttribute('aria-labelledby', h.id);
+      box.appendChild(h);
+      var n = d.companies.length;
+      box.appendChild(el('p', 'orgx-div-n', n + ' ' + plural(n, 'компания', 'компании', 'компаний')));
+      var ul = el('ul');
+      d.companies.forEach(function (c) {
+        var li = el('li');
+        if (c.id && c.id in byId) {
+          var a = el('a', 'orgx-colink');
+          a.href = coHref(c.id);
+          a.appendChild(el('span', null, c.name));
+          var go = el('span', 'orgx-colink-go', '→');
+          go.setAttribute('aria-hidden', 'true');
+          a.appendChild(go);
+          li.appendChild(a);
+        } else {
+          var off = el('div', 'orgx-cooff');
+          off.appendChild(el('span', null, c.name));
+          off.appendChild(el('small', null, 'Схема пока не утверждена'));
+          li.appendChild(off);
+        }
+        ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      map.appendChild(box);
+    });
+  })();
+  function divisionOf(id) {
+    var name = '';
+    groups.divisions.forEach(function (d) {
+      d.companies.forEach(function (c) { if (c.id === id) name = d.name; });
+    });
+    return name || (id === groups.center.id ? 'Управляющая компания' : '');
+  }
+
+  // линии паучка: от Группы к шинам слева и справа, от шин к дивизионам
+  function drawMap() {
+    var wide = map.clientWidth >= 820 && !mqMobile.matches;
+    map.classList.toggle('is-wide', wide);
+    lines.innerHTML = '';
+    var hubEl = map.querySelector('.orgx-hub');
+    hubEl.style.marginTop = '';
+    if (!wide || coView.hidden === false) return;
+    var m = map.getBoundingClientRect();
+    // Группа — в просвете между верхним и нижним рядом дивизионов
+    var top1 = map.querySelector('[data-d="build"]').getBoundingClientRect();
+    var top2 = map.querySelector('[data-d="invest"]').getBoundingClientRect();
+    var low = map.querySelector('[data-d="transport"]').getBoundingClientRect();
+    var gapMid = (Math.max(top1.bottom, top2.bottom) + low.top) / 2 - m.top;
+    hubEl.style.marginTop = Math.max(0, Math.round(gapMid - hubEl.offsetHeight / 2)) + 'px';
+    var hub = hubEl.getBoundingClientRect();
+    var hy = hub.top + hub.height / 2 - m.top;
+    var d = '';
+    [['build', 'transport', -1], ['invest', 'social', 1]].forEach(function (side) {
+      var ys = [hy], edge = side[2] < 0 ? hub.left - m.left : hub.right - m.left, far = null, stubs = [];
+      side.slice(0, 2).forEach(function (id) {
+        var r = map.querySelector('[data-d="' + id + '"]').getBoundingClientRect();
+        var x = side[2] < 0 ? r.right - m.left : r.left - m.left, y = r.top - m.top + 34;
+        far = far == null ? x : (side[2] < 0 ? Math.max(far, x) : Math.min(far, x));
+        stubs.push([x, y]);
+        ys.push(y);
+      });
+      var bx = Math.round((edge + far) / 2) + 0.5;
+      d += 'M' + edge + ' ' + hy + 'H' + bx;
+      d += 'M' + bx + ' ' + Math.min.apply(null, ys) + 'V' + Math.max.apply(null, ys);
+      stubs.forEach(function (s) { d += 'M' + bx + ' ' + s[1] + 'H' + s[0]; });
+    });
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', d);
+    lines.appendChild(path);
+  }
 
   // ---- схема
   function renderNode(n, lvl, path, coName) {
@@ -93,6 +166,10 @@
       co.appendChild(document.createTextNode(coName));
       co.setAttribute('aria-hidden', 'true');
       card.appendChild(co);
+    }
+    if (n.hq) {
+      li.classList.add('is-hq');
+      card.appendChild(el('span', 'oc-hq', 'Напрямую руководителю'));
     }
     card.appendChild(name);
     if (kids.length && lvl > 0) {
@@ -151,12 +228,9 @@
   function show(i, keepScroll) {
     current = i;
     var co = data[i];
-    Array.prototype.forEach.call(tabs.children, function (b, k) {
-      b.setAttribute('aria-selected', k === i ? 'true' : 'false');
-      b.tabIndex = k === i ? 0 : -1;
-    });
-    select.value = i;
     title.textContent = co.full;
+    crumb.textContent = divisionOf(co.id);
+    legend.hidden = !(co.tree.c || []).some(function (c) { return c.hq; });
     var total = size(co.tree) + 1, direct = (co.tree.c || []).length;
     count.innerHTML = '';
     count.appendChild(el('b', null, String(total)));
@@ -185,6 +259,7 @@
   function availWidth() { return view.clientWidth - PAD * 2; }
   function naturalWidth(colw) { var n = rowCount(); return Math.max(n * colw + (n - 1) * GAP, 300); }
   function layout() {
+    if (current < 0 || coView.hidden) return;
     var mobile = mqMobile.matches;
     var cards = stage.querySelectorAll('.oc-row > .oc-item > .oc-card');
     var head = stage.querySelector('.oc-head');
@@ -431,7 +506,8 @@
     if (qn.length < 2) { openResults(false); return; }
     var hits = index.filter(function (x) { return x.low.indexOf(qn) !== -1; });
     hits.sort(function (a, b) {
-      var ac = a.co === current ? -1 : a.co, bc = b.co === current ? -1 : b.co;
+      var cur = coView.hidden ? -1 : current;
+      var ac = a.co === cur ? -1 : a.co, bc = b.co === cur ? -1 : b.co;
       return ac - bc;
     });
     lastHits = hits;
@@ -449,7 +525,7 @@
       if (h.co !== last) {
         last = h.co;
         var head = el('p', 'orgx-res-co', data[h.co].name);
-        if (h.co === current) head.appendChild(el('span', 'orgx-res-here', 'открыта сейчас'));
+        if (h.co === current && !coView.hidden) head.appendChild(el('span', 'orgx-res-here', 'открыта сейчас'));
         results.appendChild(head);
         group = el('ul', 'orgx-res-list');
         results.appendChild(group);
@@ -461,8 +537,10 @@
   }
   function pick(h) {
     openResults(false);
-    if (h.co !== current) show(h.co);
-    reveal(h.path);
+    if (h.co === current && !coView.hidden) { reveal(h.path); return; }
+    pending = h.path;
+    var want = coHref(data[h.co].id);
+    if (location.hash === want) route(); else location.hash = want;
   }
   input.addEventListener('input', runSearch);
   input.addEventListener('focus', function () { if (input.value.trim().length >= 2) runSearch(); });
@@ -487,5 +565,36 @@
     if (!results.hidden && !q('.orgx-search').contains(e.target)) openResults(false);
   });
 
-  show(0);
+  // ---- адрес: #orgx — паучок, #orgx/<id> — структура компании
+  function route() {
+    var raw = location.hash.slice(1);
+    try { raw = decodeURIComponent(raw); } catch (e) { /* оставляем как есть */ }
+    var m = /^orgx\/(.+)$/.exec(raw);
+    var i = m && m[1] in byId ? byId[m[1]] : -1;
+    if (i < 0) {
+      coView.hidden = true;
+      map.hidden = false;
+      drawMap();
+      return;
+    }
+    map.hidden = true;
+    coView.hidden = false;
+    var same = i === current;
+    if (!same) show(i);
+    else layout();
+    if (pending) {
+      var p = pending;
+      pending = null;
+      reveal(p);
+    } else if (!same || document.activeElement === document.body) {
+      title.tabIndex = -1;
+      try { title.focus({ preventScroll: true }); } catch (e) { title.focus(); }
+    }
+  }
+  window.addEventListener('hashchange', route);
+  if (window.ResizeObserver) new ResizeObserver(function () { if (!map.hidden) drawMap(); }).observe(map);
+  else window.addEventListener('resize', drawMap);
+  if (mqMobile.addEventListener) mqMobile.addEventListener('change', drawMap);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (!map.hidden) drawMap(); });
+  route();
 })();
