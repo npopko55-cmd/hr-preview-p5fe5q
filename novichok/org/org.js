@@ -55,6 +55,7 @@
     return w.firstChild;
   }
   var CHEV = '<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4.5L6 7.5l3-3"/></svg>';
+  var ARROW = '<svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7h9M7.5 3l4 4-4 4"/></svg>';
   var TRIS = '<svg class="tris" aria-hidden="true" focusable="false"><use href="#i-tris"/></svg>';
 
   // ---- паучок: Группа «ВИС» в центре, дивизионы с компаниями вокруг
@@ -86,14 +87,14 @@
           var a = el('a', 'orgx-colink');
           a.href = coHref(c.id);
           a.appendChild(el('span', null, c.name));
-          var go = el('span', 'orgx-colink-go', '→');
+          var go = el('span', 'orgx-colink-go');
+          go.appendChild(svg(ARROW));
           go.setAttribute('aria-hidden', 'true');
           a.appendChild(go);
           li.appendChild(a);
         } else {
           var off = el('div', 'orgx-cooff');
           off.appendChild(el('span', null, c.name));
-          off.appendChild(el('small', null, 'Схема пока не утверждена'));
           li.appendChild(off);
         }
         ul.appendChild(li);
